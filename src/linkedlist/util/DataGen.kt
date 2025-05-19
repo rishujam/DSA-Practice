@@ -38,4 +38,30 @@ object DataGen {
             head = head.next!!
         }
     }
+
+    @JvmStatic
+    fun printLinkedList(node: ListNode) {
+        var temp = node
+        while(temp != null) {
+            print(temp.`val`.toString() + "->")
+            temp = temp.next
+        }
+    }
+
+    @JvmStatic
+    fun getSize5LinkedList(): ListNode {
+        val input = ListNode(1);
+        input.next = ListNode(2);
+        input.next.next = ListNode(3);
+        input.next.next.next = ListNode(4);
+        input.next.next.next.next = ListNode(5);
+        return input
+    }
+
+    @JvmStatic
+    fun getSize2LinkedList(): ListNode {
+        val input = ListNode(1)
+        input.next = ListNode(2)
+        return input
+    }
 }
