@@ -65,3 +65,8 @@ object DataGen {
         return input
     }
 }
+
+fun main() {
+    val x = "wordgoodgoodgoodbestword"
+//    print(x.replaceFirst("word", ))
+}
