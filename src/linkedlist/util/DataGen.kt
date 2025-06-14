@@ -66,7 +66,61 @@ object DataGen {
     }
 }
 
+fun logDumpGetUniques(): String {
+    val log_dump = "name=John Trust, username=john3, email=john3@gmail.com, id=434453; name=Hannah Smith, username=hsmith, email=hsm@test.com, id=23312; name=Hannah Smith, username=hsmith, id=3223423, email=hsm@test.com; name=Robert M, username=rm44, id=222342, email=rm@me.com; name=Robert M, username=rm4411, id=5535, email=rm@me.com; name=Susan Vee, username=sv55, id=443432, email=susanv123@me.com; name=Robert Nick, username=rnick33, id=23432, email=rnick@gmail.com; name=Robert Nick II, username=rnickTemp34, id=23432, email=rnick@gmail.com; name=Susan Vee, username=sv55, id=443432, email=susanv123@me.com;"
+
+    val seenUsernames = mutableSetOf<String>()
+    val uniqueLogs = mutableListOf<String>()
+
+    val logItems = log_dump.split(";")
+
+    for (item in logItems) {
+        if (item.isBlank()) continue
+
+        val properties = item.split(",")
+            .map { it.trim() }
+            .filterNot { it.startsWith("id=") || it.startsWith("id =") }
+
+        val usernameEntry = properties.find { it.startsWith("username=") }
+        val username = usernameEntry?.substringAfter("=")?.trim()
+
+        if (username != null && seenUsernames.add(username)) {
+            val formatted = properties.joinToString(", ") { it.replace("=", ":") }
+            uniqueLogs.add(formatted)
+        }
+    }
+
+    return uniqueLogs.joinToString("; ")
+}
+
+fun logDumpGetUniques2(): String {
+    val log_dump = "name=John Trust, username=john3, email=john3@gmail.com, id=434453; name=Hannah Smith, username=hsmith, email=hsm@test.com, id=23312; name=Hannah Smith, username=hsmith, id=3223423, email=hsm@test.com; name=Robert M, username=rm44, id=222342, email=rm@me.com; name=Robert M, username=rm4411, id=5535, email=rm@me.com; name=Susan Vee, username=sv55, id=443432, email=susanv123@me.com; name=Robert Nick, username=rnick33, id=23432, email=rnick@gmail.com; name=Robert Nick II, username=rnickTemp34, id=23432, email=rnick@gmail.com; name=Susan Vee, username=sv55, id=443432, email=susanv123@me.com;"
+
+    val seenUsernames = mutableSetOf<String>()
+    val uniqueLogs = mutableListOf<String>()
+
+    val logItems = log_dump.split(";")
+
+    for (item in logItems) {
+        if (item.isBlank()) continue
+
+        val properties = item.split(",")
+            .map { it.trim() }
+            .filterNot { it.startsWith("id=") || it.startsWith("id =") }
+
+        val usernameEntry = properties.find { it.startsWith("username=") }
+        val username = usernameEntry?.substringAfter("=")?.trim()
+
+        if (username != null && seenUsernames.add(username)) {
+            val formatted = properties.joinToString(", ") { it.replace("=", ":") }
+            uniqueLogs.add(formatted)
+        }
+    }
+
+    return uniqueLogs.joinToString("; ")
+}
+
+
 fun main() {
-    val x = "wordgoodgoodgoodbestword"
-//    print(x.replaceFirst("word", ))
+    System.out.println(logDumpGetUniques2().split(";"))
 }
